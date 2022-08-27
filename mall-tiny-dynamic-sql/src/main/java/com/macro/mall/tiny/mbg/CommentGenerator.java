@@ -1,7 +1,6 @@
 package com.macro.mall.tiny.mbg;
 
 import cn.hutool.core.collection.CollUtil;
-import com.sun.org.apache.regexp.internal.RE;
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.dom.java.CompilationUnit;
@@ -34,7 +33,9 @@ public class CommentGenerator extends DefaultCommentGenerator {
 
     @Override
     public void addFieldAnnotation(Field field, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn, Set<FullyQualifiedJavaType> imports) {
-        if (!addRemarkComments || CollUtil.isEmpty(imports)) return;
+        if (!addRemarkComments || CollUtil.isEmpty(imports)) {
+            return;
+        }
         long count = imports.stream()
                 .filter(item -> API_MODEL_PROPERTY_FULL_CLASS_NAME.equals(item.getFullyQualifiedName()))
                 .count();

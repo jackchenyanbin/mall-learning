@@ -31,7 +31,7 @@ public class UmsAdminController {
     @ApiOperation(value = "登录以后返回token")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult login(@RequestParam String username, @RequestParam String password) {
+    public CommonResult<Map<String, String>> login(@RequestParam String username, @RequestParam String password) {
         SaTokenInfo saTokenInfo = adminService.login(username, password);
         if (saTokenInfo == null) {
             return CommonResult.validateFailed("用户名或密码错误");
@@ -45,7 +45,7 @@ public class UmsAdminController {
     @ApiOperation(value = "查询当前登录状态")
     @RequestMapping(value = "/isLogin",method = RequestMethod.GET)
     @ResponseBody
-    public CommonResult isLogin() {
+    public CommonResult<Boolean> isLogin() {
         return CommonResult.success(StpUtil.isLogin());
     }
 }
